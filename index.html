@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Question ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 25%, #ffa8c5 50%, #ffc0d9 75%, #ffe0ec 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 25px;
+            animation: float 8s ease-in-out infinite;
+            text-shadow: 0 0 10px rgba(255, 192, 203, 0.8);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+            animation: sparkle 3s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 20px;
+            animation: fadeIn 1s ease-in;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #ffffff;
+            margin-bottom: 40px;
+            font-size: 3.5em;
+            text-shadow: 
+                0 0 10px rgba(255, 105, 180, 0.8),
+                0 0 20px rgba(255, 105, 180, 0.6),
+                0 0 30px rgba(255, 105, 180, 0.4),
+                2px 2px 4px rgba(0, 0, 0, 0.2);
+            animation: pulse 2s ease-in-out infinite;
+            font-weight: bold;
+            letter-spacing: 2px;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            display: none;
+        }
+
+        h1.fade-out {
+            opacity: 0;
+            transform: translateY(-20px);
+            pointer-events: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .bear-container {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            min-height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .bear-container.fade-out {
+            opacity: 0;
+            transform: translateY(-20px);
+            pointer-events: none;
+        }
+
+        .bear-gif {
+            max-width: 300px;
+            max-height: 300px;
+            width: auto;
+            height: auto;
+            filter: drop-shadow(0 0 15px rgba(255, 192, 203, 0.6));
+            object-fit: contain;
+        }
+
+        .question {
+            font-size: 2em;
+            color: #ffffff;
+            margin-bottom: 60px;
+            line-height: 1.8;
+            text-shadow: 
+                0 0 10px rgba(255, 192, 203, 0.8),
+                0 0 20px rgba(255, 192, 203, 0.6),
+                2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .question.fade-out {
+            opacity: 0;
+            transform: translateY(-20px);
+            pointer-events: none;
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            position: relative;
+            min-height: 150px;
+            width: 100%;
+        }
+
+        .btn {
+            padding: 20px 50px;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 10;
+            font-family: 'Georgia', serif;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 50%, #ffa8c5 100%);
+            color: white;
+            box-shadow: 
+                0 8px 25px rgba(255, 105, 157, 0.5),
+                0 0 20px rgba(255, 192, 203, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            z-index: 20;
+            position: relative;
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.1);
+            box-shadow: 
+                0 12px 35px rgba(255, 105, 157, 0.7),
+                0 0 30px rgba(255, 192, 203, 0.8),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            background: linear-gradient(135deg, #ff8fab 0%, #ffa8c5 50%, #ffc0d9 100%);
+        }
+
+        .btn-yes:active {
+            transform: scale(1.05);
+        }
+
+        .btn-no {
+            background: linear-gradient(135deg, #ffb3d1 0%, #ffc0d9 100%);
+            color: #ff6b9d;
+            position: relative;
+            transition: all 0.1s ease;
+            box-shadow: 
+                0 6px 20px rgba(255, 192, 203, 0.4),
+                0 0 15px rgba(255, 182, 193, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            z-index: 5;
+        }
+
+        .btn-no:hover {
+            transform: scale(1.08);
+            box-shadow: 
+                0 8px 25px rgba(255, 192, 203, 0.6),
+                0 0 20px rgba(255, 182, 193, 0.7);
+        }
+
+        .success-animation {
+            display: none;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            height: 150px;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            z-index: 100;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animated-heart {
+            position: absolute;
+            font-size: 80px;
+            animation: heartBeat 1s ease-in-out infinite;
+            text-shadow: 
+                0 0 20px rgba(255, 105, 180, 0.8),
+                0 0 40px rgba(255, 105, 180, 0.6),
+                0 0 60px rgba(255, 105, 180, 0.4);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .animated-heart:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .animated-heart:nth-child(2) {
+            font-size: 60px;
+            animation-delay: 0.2s;
+            transform: translate(-50%, -50%) rotate(15deg);
+            left: 45%;
+        }
+
+        .animated-heart:nth-child(3) {
+            font-size: 60px;
+            animation-delay: 0.4s;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            left: 55%;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            25% {
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+            75% {
+                transform: translate(-50%, -50%) scale(1.15);
+            }
+        }
+
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 30px;
+            opacity: 0;
+            animation: floatAround 3s ease-in-out infinite;
+        }
+
+        .floating-heart:nth-child(1) {
+            left: 20%;
+            top: 20%;
+            animation-delay: 0s;
+        }
+
+        .floating-heart:nth-child(2) {
+            left: 80%;
+            top: 30%;
+            animation-delay: 0.5s;
+        }
+
+        .floating-heart:nth-child(3) {
+            left: 15%;
+            top: 70%;
+            animation-delay: 1s;
+        }
+
+        .floating-heart:nth-child(4) {
+            left: 85%;
+            top: 80%;
+            animation-delay: 1.5s;
+        }
+
+        .floating-heart:nth-child(5) {
+            left: 50%;
+            top: 10%;
+            animation-delay: 2s;
+        }
+
+        .floating-heart:nth-child(6) {
+            left: 50%;
+            top: 90%;
+            animation-delay: 2.5s;
+        }
+
+        @keyframes floatAround {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-30px) rotate(180deg) scale(1.2);
+                opacity: 0.8;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(0) rotate(360deg) scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        .success-message {
+            display: none;
+            margin-top: 20px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.2) 100%);
+            backdrop-filter: blur(10px);
+            color: white;
+            border-radius: 30px;
+            font-size: 2em;
+            animation: slideUpFadeIn 1.2s ease-out;
+            text-shadow: 
+                0 0 15px rgba(255, 192, 203, 0.8),
+                0 0 25px rgba(255, 192, 203, 0.6),
+                2px 2px 4px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 
+                0 10px 40px rgba(255, 105, 157, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 100;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @keyframes slideUpFadeIn {
+            0% {
+                transform: translateY(300px) scale(0.7);
+                opacity: 0;
+            }
+            40% {
+                transform: translateY(-20px) scale(1.08);
+                opacity: 0.6;
+            }
+            60% {
+                transform: translateY(10px) scale(0.95);
+                opacity: 0.85;
+            }
+            80% {
+                transform: translateY(-5px) scale(1.02);
+                opacity: 0.95;
+            }
+            100% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #f5576c;
+            position: absolute;
+            animation: confetti-fall 3s linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Media Queries untuk Responsive Design */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10px;
+                overflow-x: hidden;
+            }
+
+            .content {
+                padding: 15px;
+                max-width: 100%;
+            }
+
+            h1 {
+                font-size: 2em;
+                margin-bottom: 30px;
+                letter-spacing: 1px;
+            }
+
+            .bear-container {
+                min-height: 150px;
+                margin-bottom: 20px;
+            }
+
+            .bear-gif {
+                max-width: 250px;
+                max-height: 250px;
+            }
+
+            .question {
+                font-size: 1.3em;
+                margin-bottom: 40px;
+                padding: 0 10px;
+                line-height: 1.6;
+            }
+
+            .buttons-container {
+                min-height: 120px;
+                gap: 15px;
+                padding: 0 10px;
+            }
+
+            .btn {
+                padding: 15px 30px;
+                font-size: 1.1em;
+            }
+
+            .btn-yes {
+                width: auto;
+                min-width: 120px;
+            }
+
+            .btn-no {
+                min-width: 100px;
+            }
+
+            .success-animation {
+                height: 120px;
+            }
+
+            .animated-heart {
+                font-size: 60px;
+            }
+
+            .animated-heart:nth-child(2),
+            .animated-heart:nth-child(3) {
+                font-size: 45px;
+            }
+
+            .floating-heart {
+                font-size: 25px;
+            }
+
+            .success-message {
+                font-size: 1.3em;
+                padding: 20px;
+                margin-top: 30px;
+            }
+
+            .heart {
+                font-size: 18px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            h1 {
+                font-size: 1.5em;
+                margin-bottom: 20px;
+            }
+
+            .bear-container {
+                min-height: 120px;
+                margin-bottom: 15px;
+            }
+
+            .bear-gif {
+                max-width: 200px;
+                max-height: 200px;
+            }
+
+            .question {
+                font-size: 1.1em;
+                margin-bottom: 30px;
+            }
+
+            .buttons-container {
+                min-height: 100px;
+                gap: 10px;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+
+            .btn-yes {
+                min-width: 100px;
+            }
+
+            .btn-no {
+                min-width: 80px;
+            }
+
+            .success-animation {
+                height: 100px;
+            }
+
+            .animated-heart {
+                font-size: 50px;
+            }
+
+            .animated-heart:nth-child(2),
+            .animated-heart:nth-child(3) {
+                font-size: 35px;
+            }
+
+            .floating-heart {
+                font-size: 20px;
+            }
+
+            .success-message {
+                font-size: 1.1em;
+                padding: 15px;
+                margin-top: 20px;
+            }
+
+            .heart {
+                font-size: 15px;
+            }
+        }
+
+        @media screen and (max-width: 360px) {
+            h1 {
+                font-size: 1.3em;
+            }
+
+            .bear-container {
+                min-height: 100px;
+                margin-bottom: 10px;
+            }
+
+            .bear-gif {
+                max-width: 150px;
+                max-height: 150px;
+            }
+
+            .question {
+                font-size: 1em;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+
+            .success-animation {
+                height: 80px;
+            }
+
+            .animated-heart {
+                font-size: 40px;
+            }
+
+            .animated-heart:nth-child(2),
+            .animated-heart:nth-child(3) {
+                font-size: 30px;
+            }
+
+            .floating-heart {
+                font-size: 18px;
+            }
+
+            .success-message {
+                font-size: 1em;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    <div class="sparkles" id="sparkles"></div>
+    
+    <div class="content">
+        <h1>💕 Valentine Question 💕</h1>
+        <div class="bear-container">
+            <img src="assets/awal.gif" alt="Bear" class="bear-gif">
+        </div>
+        <div class="question" id="question">
+            Maukah kamu menjadi valentine ku? ❤️
+        </div>
+        <div class="buttons-container" id="buttonsContainer">
+            <button class="btn btn-yes" id="btnYes">Iya ❤️</button>
+            <button class="btn btn-no" id="btnNo">Tidak</button>
+        </div>
+        <div class="success-animation" id="successAnimation">
+            <div class="animated-heart">❤️</div>
+            <div class="animated-heart">💕</div>
+            <div class="animated-heart">💖</div>
+            <div class="floating-hearts">
+                <div class="floating-heart">💗</div>
+                <div class="floating-heart">💝</div>
+                <div class="floating-heart">💘</div>
+                <div class="floating-heart">💞</div>
+                <div class="floating-heart">💓</div>
+                <div class="floating-heart">💕</div>
+            </div>
+        </div>
+        <div class="success-message" id="successMessage">
+            Yay! Makasih Banyak. XIXIXI💖
+        </div>
+    </div>
+
+    <script>
+        const btnYes = document.getElementById('btnYes');
+        const btnNo = document.getElementById('btnNo');
+        const buttonsContainer = document.getElementById('buttonsContainer');
+        const successMessage = document.getElementById('successMessage');
+        const successAnimation = document.getElementById('successAnimation');
+        const heartsContainer = document.getElementById('hearts');
+        const sparklesContainer = document.getElementById('sparkles');
+        const titleH1 = document.querySelector('h1');
+        const question = document.getElementById('question');
+        const bearGif = document.querySelector('.bear-gif');
+        
+        let yesSize = 1;
+        let noClickCount = 0;
+
+        // Membuat efek hujan hati
+        function createHearts() {
+            const heartEmojis = ['💕', '❤️', '💖', '💗', '💝', '💘', '💞', '💓'];
+            for (let i = 0; i < 40; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 8 + 's';
+                heart.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                heart.style.fontSize = (Math.random() * 15 + 20) + 'px';
+                heartsContainer.appendChild(heart);
+            }
+        }
+
+        // Membuat efek sparkles
+        function createSparkles() {
+            for (let i = 0; i < 50; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 3 + 's';
+                sparkle.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                sparklesContainer.appendChild(sparkle);
+            }
+        }
+
+        createHearts();
+        createSparkles();
+
+        // Fungsi untuk memindahkan tombol "Tidak" secara acak di samping tombol "Iya"
+        function moveNoButton() {
+            // Pastikan tombol "Tidak" menggunakan position fixed dan z-index lebih rendah
+            btnNo.style.position = 'fixed';
+            btnNo.style.zIndex = '5';
+            
+            const btnNoRect = btnNo.getBoundingClientRect();
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            
+            // Posisi acak di seluruh viewport
+            // Pastikan tombol tidak keluar dari viewport
+            const maxX = viewportWidth - btnNoRect.width - 20;
+            const maxY = viewportHeight - btnNoRect.height - 20;
+            
+            // Generate posisi acak di seluruh layar
+            const randomX = Math.max(20, Math.random() * maxX);
+            const randomY = Math.max(20, Math.random() * maxY);
+            
+            btnNo.style.left = randomX + 'px';
+            btnNo.style.top = randomY + 'px';
+        }
+
+        // Event listener untuk tombol "Tidak"
+        btnNo.addEventListener('click', function() {
+            noClickCount++;
+            
+            // Membuat tombol "Iya" semakin besar dan memastikan berada di depan
+            yesSize += 0.2;
+            btnYes.style.transform = `scale(${yesSize})`;
+            btnYes.style.fontSize = (1.2 + noClickCount * 0.1) + 'em';
+            btnYes.style.zIndex = '20';
+            
+            // Memindahkan tombol "Tidak" secara acak
+            moveNoButton();
+            
+            // Menambahkan efek visual
+            btnNo.style.opacity = '0.8';
+            setTimeout(() => {
+                btnNo.style.opacity = '1';
+            }, 200);
+            
+            // Mengubah GIF setelah 2 klik
+            if (noClickCount === 2) {
+                bearGif.src = 'assets/2x.gif';
+            }
+            
+            // Mengubah GIF setelah 4 klik
+            if (noClickCount === 4) {
+                bearGif.src = 'assets/4x.gif';
+            }
+        });
+
+        // Event listener untuk tombol "Iya"
+        btnYes.addEventListener('click', function() {
+            // Mengubah GIF ketika Iya diklik
+            bearGif.src = 'assets/yes.gif';
+            
+            // Menyembunyikan tombol
+            btnYes.style.display = 'none';
+            btnNo.style.display = 'none';
+            
+            // Menyembunyikan judul dan pertanyaan
+            titleH1.style.display = 'none';
+            question.style.display = 'none';
+            
+            // Menampilkan pesan sukses
+            successMessage.style.display = 'block';
+            
+            // Membuat efek confetti
+            createConfetti();
+            
+            // Membuat lebih banyak hati
+            createCelebrationHearts();
+            
+            // Membuat lebih banyak sparkles
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    sparkle.style.left = Math.random() * 100 + '%';
+                    sparkle.style.top = Math.random() * 100 + '%';
+                    sparkle.style.width = (Math.random() * 6 + 4) + 'px';
+                    sparkle.style.height = (Math.random() * 6 + 4) + 'px';
+                    sparkle.style.animation = 'sparkle 2s ease-in-out infinite';
+                    document.body.appendChild(sparkle);
+                }, i * 100);
+            }
+        });
+
+        // Fungsi untuk membuat efek confetti
+        function createConfetti() {
+            const colors = ['#ff6b9d', '#ff8fab', '#ffa8c5', '#ffc0d9', '#ffe0ec', '#ffffff'];
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = (Math.random() * 12 + 6) + 'px';
+                confetti.style.height = (Math.random() * 12 + 6) + 'px';
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0%';
+                confetti.style.boxShadow = '0 0 10px rgba(255, 255, 255, 0.8)';
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => {
+                    confetti.remove();
+                }, 3000);
+            }
+        }
+
+        // Fungsi untuk membuat lebih banyak hati ketika "Iya" diklik
+        function createCelebrationHearts() {
+            const heartEmojis = ['💕', '❤️', '💖', '💗', '💝', '💘', '💞', '💓'];
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.style.position = 'fixed';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.top = Math.random() * 100 + '%';
+                    heart.style.fontSize = (Math.random() * 30 + 30) + 'px';
+                    heart.style.color = '#ffffff';
+                    heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                    heart.style.pointerEvents = 'none';
+                    heart.style.zIndex = '1000';
+                    heart.style.animation = 'float 3s ease-out forwards';
+                    heart.style.textShadow = '0 0 20px rgba(255, 192, 203, 1)';
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 3000);
+                }, i * 50);
+            }
+        }
+
+    </script>
+</body>
+</html>
